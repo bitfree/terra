@@ -2,6 +2,14 @@ provider "aws" {
   region = "ap-northeast-2"
 }
 
+/* variable for server_port */
+
+variable "server_port" {
+  description = "The port the server will use for HTTP requests"
+  default = 8080
+}
+
+
 resource "aws_instance" "example" {
   ami = "ami-05438a9ce08100b25"
   instance_type = "t2.micro"
@@ -35,15 +43,15 @@ resource "aws_security_group" "instance" {
   }
 
   ingress {
-    from_port = 80
-    to_port = 80
+    from_port = var.server_port
+    to_port = var.server_port
     protocol = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
  
   egress {
-    from_port   = 80
-    to_port     = 80
+    from_port   = var.server_port
+    to_port     = var.server_port
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   } 
