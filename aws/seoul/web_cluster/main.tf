@@ -122,5 +122,3 @@ resource "aws_security_group" "elb" {
 output "elb_dns_name" {
     value = aws_elb.example.dns_name
 }
-
-   
